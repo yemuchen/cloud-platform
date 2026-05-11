@@ -1,0 +1,25 @@
+server:
+  port: 9080
+
+logging:
+  level:
+    com.cjlgb: info
+    com.alibaba.nacos.client.config.impl.ClientWorker: info
+# 开启Sentinel熔断器
+feign:
+  sentinel:
+    enabled: true
+# mybatis-plus config
+mybatis-plus:
+  # 实体扫描，多个package用逗号或者分号分隔
+  type-aliases-package: com.cjlgb.design.common.oauth.entity
+
+# TODO  后期加入配置中心
+spring:
+  redis:
+    host: 10.252.37.200
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://10.252.37.200:3306/luter_oauth?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: root
