@@ -1,6 +1,6 @@
 package com.cjlgb.design.common.security.service;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * @author WFT

@@ -31,15 +31,15 @@
         <maven.compiler.target>17</maven.compiler.target>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
         <!-- Spring Boot -->
-        <spring-boot-dependencies.version>2.7.18</spring-boot-dependencies.version>
+        <spring-boot-dependencies.version>3.5.0</spring-boot-dependencies.version>
         <!-- Spring Cloud -->
-        <spring-cloud-dependencies.version>2021.0.8</spring-cloud-dependencies.version>
+        <spring-cloud-dependencies.version>2023.0.0</spring-cloud-dependencies.version>
         <!-- Spring Cloud Alibaba -->
-        <spring-cloud-alibaba-dependencies.version>2021.0.5.0</spring-cloud-alibaba-dependencies.version>
+        <spring-cloud-alibaba-dependencies.version>2022.0.0.0</spring-cloud-alibaba-dependencies.version>
         <!-- mybatis-plus -->
-        <mbp.boot.version>3.3.2</mbp.boot.version>
+        <mbp.boot.version>3.5.3</mbp.boot.version>
         <!-- jwt -->
-        <jwt.version>3.8.3</jwt.version>
+        <jwt.version>4.4.0</jwt.version>
     </properties>
 
     <repositories>
@@ -96,9 +96,9 @@
             </dependency>
             <!-- mysql connector -->
             <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>8.0.33</version>
+                <groupId>com.mysql</groupId>
+                <artifactId>mysql-connector-j</artifactId>
+                <version>8.4.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

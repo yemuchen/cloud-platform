@@ -1,7 +1,8 @@
 package com.cjlgb.design.common.core.util;
 
-import org.springframework.util.Base64Utils;
 import org.springframework.util.DigestUtils;
+
+import java.util.Base64;
 
 /**
  * @author WFT
@@ -33,7 +34,7 @@ public final class StrUtils {
      * @return java.lang.String
      */
     private String encodeBasicAuthStr(String username,String password){
-        return Holder.BASIC + Base64Utils.encodeToString((username + Holder.COLON + password).getBytes());
+        return Holder.BASIC + Base64.getEncoder().encodeToString((username + Holder.COLON + password).getBytes());
     }
 
     /**
@@ -54,7 +55,7 @@ public final class StrUtils {
      */
     public String[] decodeBasicAuthStr(String basicAuth){
         basicAuth = basicAuth.replace(Holder.BASIC,"").trim();
-        return new String(Base64Utils.decodeFromString(basicAuth)).split(Holder.COLON);
+        return new String(Base64.getDecoder().decode(basicAuth)).split(Holder.COLON);
     }
 
     /**
