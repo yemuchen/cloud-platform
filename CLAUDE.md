@@ -4,15 +4,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 项目概述
 
-基于 Spring Cloud Hoxton、Spring Boot 2.3、OAuth2 的 RBAC 权限管理系统。使用 Nacos 作为注册/配置中心，Sentinel 作为熔断器。
+基于 Spring Cloud 2021、Spring Boot 2.7、OAuth2 的 RBAC 权限管理系统。使用 Nacos 作为注册/配置中心，Sentinel 作为熔断器。
 
 ## 技术栈
 
 - Java 1.8
-- Spring Boot 2.3.1.RELEASE
-- Spring Cloud Hoxton.SR5
-- Spring Cloud Alibaba 2.2.1.RELEASE
+- Spring Boot 2.7.18
+- Spring Cloud 2021.0.8
+- Spring Cloud Alibaba 2021.0.5.0
 - Mybatis Plus 3.3.2
+- MySQL Connector 8.0.33
 - JWT 3.8.3
 
 ## 模块架构

@@ -31,11 +31,11 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
         <!-- Spring Boot -->
-        <spring-boot-dependencies.version>2.3.1.RELEASE</spring-boot-dependencies.version>
+        <spring-boot-dependencies.version>2.7.18</spring-boot-dependencies.version>
         <!-- Spring Cloud -->
-        <spring-cloud-dependencies.version>Hoxton.SR5</spring-cloud-dependencies.version>
+        <spring-cloud-dependencies.version>2021.0.8</spring-cloud-dependencies.version>
         <!-- Spring Cloud Alibaba -->
-        <spring-cloud-alibaba-dependencies.version>2.2.1.RELEASE</spring-cloud-alibaba-dependencies.version>
+        <spring-cloud-alibaba-dependencies.version>2021.0.5.0</spring-cloud-alibaba-dependencies.version>
         <!-- mybatis-plus -->
         <mbp.boot.version>3.3.2</mbp.boot.version>
         <!-- jwt -->
@@ -93,6 +93,12 @@
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mbp.boot.version}</version>
+            </dependency>
+            <!-- mysql connector -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>8.0.33</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
