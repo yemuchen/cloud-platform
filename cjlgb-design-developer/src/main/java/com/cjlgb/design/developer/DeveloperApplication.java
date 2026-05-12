@@ -2,7 +2,7 @@ package com.cjlgb.design.developer;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
-import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
@@ -11,7 +11,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * description:开发者服务启动类
  */
 @EnableFeignClients(value = "com.cjlgb.design.common.oauth.feign")
-@SpringCloudApplication
+@SpringBootApplication
 @MapperScan(value = "com.cjlgb.design.developer.mapper")
 public class DeveloperApplication {
 

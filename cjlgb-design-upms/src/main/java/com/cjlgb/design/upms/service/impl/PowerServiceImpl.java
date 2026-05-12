@@ -35,7 +35,7 @@ public class PowerServiceImpl extends BaseServiceImpl<SysPowerMapper, SysPower> 
      * @param permission java.lang.String
      */
     private void ensurePermissionNotExist(String permission){
-        int count = this.count(Wrappers.<SysPower>lambdaQuery().eq(SysPower::getPermission, permission));
+        long count = this.count(Wrappers.<SysPower>lambdaQuery().eq(SysPower::getPermission, permission));
         Assert.isTrue(count == 0,"权限标识已存在");
     }
 

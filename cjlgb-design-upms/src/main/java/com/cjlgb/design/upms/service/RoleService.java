@@ -42,7 +42,7 @@ public interface RoleService extends BaseService<SysRole> {
      */
     default void create(SysRole parameter){
         //  确保角色名称不存在
-        int count = this.count(Wrappers.<SysRole>lambdaQuery().eq(SysRole::getRoleName,parameter.getRoleName()));
+        long count = this.count(Wrappers.<SysRole>lambdaQuery().eq(SysRole::getRoleName,parameter.getRoleName()));
         Assert.isTrue(count == 0,"角色名称已存在");
         //  创建角色
         this.save(parameter);
@@ -54,7 +54,7 @@ public interface RoleService extends BaseService<SysRole> {
      */
     default void update(SysRole parameter){
         //  确保角色名称不存在
-        int count = this.count(Wrappers.<SysRole>lambdaQuery()
+        long count = this.count(Wrappers.<SysRole>lambdaQuery()
                 .eq(SysRole::getRoleName,parameter.getRoleName())
                 .ne(SysRole::getId,parameter.getId()));
         Assert.isTrue(count == 0,"角色名称已存在");

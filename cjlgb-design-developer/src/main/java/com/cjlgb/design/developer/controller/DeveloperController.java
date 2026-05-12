@@ -14,13 +14,13 @@ import com.cjlgb.design.common.security.bean.Authentication;
 import com.cjlgb.design.common.security.context.SecurityContextHolder;
 import com.cjlgb.design.common.security.service.SecurityService;
 import com.cjlgb.design.developer.service.DeveloperService;
+import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.util.Assert;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.ArrayList;

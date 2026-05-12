@@ -13,6 +13,7 @@ import com.cjlgb.design.common.oauth.entity.OauthClient;
 import com.cjlgb.design.oauth.service.ClientService;
 import com.cjlgb.design.oauth.service.GrantCodeService;
 import com.cjlgb.design.oauth.service.GrantFactory;
+import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpHeaders;
@@ -20,7 +21,6 @@ import org.springframework.util.Assert;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 
 /**
  * @author WFT

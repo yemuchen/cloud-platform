@@ -13,13 +13,13 @@ import com.cjlgb.design.common.security.bean.Authentication;
 import com.cjlgb.design.common.security.service.SecurityService;
 import com.cjlgb.design.common.upms.entity.Employee;
 import com.cjlgb.design.upms.service.EmployeeService;
+import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.Collection;
 
 /**

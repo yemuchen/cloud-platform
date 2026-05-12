@@ -2,14 +2,14 @@ package com.cjlgb.design.system;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
-import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author WFT
  * @date 2020/5/13
  * description:系统服务启动类
  */
-@SpringCloudApplication
+@SpringBootApplication
 @MapperScan(value = "com.cjlgb.design.system.mapper")
 public class SystemApplication {
 
