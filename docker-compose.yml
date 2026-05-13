@@ -1,0 +1,162 @@
+version: '3.8'
+
+services:
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: cjlgb-design-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: cjlgb_design_system
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./cjlgb-design-oauth/cjlgb-design-oauth.sql:/docker-entrypoint-initdb.d/01-oauth.sql
+      - ./cjlgb-design-system/cjlgb-design-system.sql:/docker-entrypoint-initdb.d/02-system.sql
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    networks:
+      - cjlgb-network
+
+  # Redis
+  redis:
+    image: redis:7-alpine
+    container_name: cjlgb-design-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - cjlgb-network
+
+  # Nacos Service Registry & Config Center
+  nacos:
+    image: nacos/nacos-server:v2.2.3
+    container_name: cjlgb-design-nacos
+    environment:
+      MODE: standalone
+      PREFER_HOST_MODE: hostname
+    ports:
+      - "8848:8848"
+      - "9848:9848"
+    volumes:
+      - nacos_data:/home/nacos/data
+    networks:
+      - cjlgb-network
+
+  # Nginx Reverse Proxy
+  nginx:
+    image: nginx:alpine
+    container_name: cjlgb-design-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - gateway
+    networks:
+      - cjlgb-network
+
+  # UPMS Service (User Permission Management)
+  upms:
+    build:
+      context: ./cjlgb-design-upms
+      dockerfile: Dockerfile
+    container_name: cjlgb-design-upms
+    ports:
+      - "9081:9081"
+    environment:
+      SPRING_REDIS_HOST: redis
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/cjlgb_design_upms?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_CLOUD_NACOS_DISCOVERY_SERVER_ADDR: nacos:8848
+    depends_on:
+      - mysql
+      - redis
+      - nacos
+    networks:
+      - cjlgb-network
+
+  # OAuth Service (Authentication)
+  oauth:
+    build:
+      context: ./cjlgb-design-oauth
+      dockerfile: Dockerfile
+    container_name: cjlgb-design-oauth
+    ports:
+      - "9080:9080"
+    environment:
+      SPRING_REDIS_HOST: redis
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/cjlgb_design_oauth?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_CLOUD_NACOS_DISCOVERY_SERVER_ADDR: nacos:8848
+    depends_on:
+      - mysql
+      - redis
+      - nacos
+    networks:
+      - cjlgb-network
+
+  # System Service (SMS etc.)
+  system:
+    build:
+      context: ./cjlgb-design-system
+      dockerfile: Dockerfile
+    container_name: cjlgb-design-system
+    environment:
+      SPRING_REDIS_HOST: redis
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/cjlgb_design_system?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_CLOUD_NACOS_DISCOVERY_SERVER_ADDR: nacos:8848
+    depends_on:
+      - mysql
+      - redis
+      - nacos
+    networks:
+      - cjlgb-network
+
+  # Developer Service
+  developer:
+    build:
+      context: ./cjlgb-design-developer
+      dockerfile: Dockerfile
+    container_name: cjlgb-design-developer
+    environment:
+      SPRING_REDIS_HOST: redis
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/cjlgb_design_oauth?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_CLOUD_NACOS_DISCOVERY_SERVER_ADDR: nacos:8848
+    depends_on:
+      - mysql
+      - redis
+      - nacos
+    networks:
+      - cjlgb-network
+
+  # API Gateway
+  gateway:
+    build:
+      context: ./cjlgb-design-gateway
+      dockerfile: Dockerfile
+    container_name: cjlgb-design-gateway
+    ports:
+      - "10001:10001"
+    environment:
+      SPRING_CLOUD_NACOS_DISCOVERY_SERVER_ADDR: nacos:8848
+    depends_on:
+      - nacos
+    networks:
+      - cjlgb-network
+
+volumes:
+  mysql_data:
+  redis_data:
+  nacos_data:
+
+networks:
+  cjlgb-network:
+    driver: bridge

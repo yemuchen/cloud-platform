@@ -16,10 +16,11 @@ mybatis-plus:
 
 # TODO  后期加入配置中心
 spring:
-  redis:
-    host: 10.252.37.200
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://10.252.37.200:3306/luter_oauth?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+    url: jdbc:mysql://10.252.37.200:3306/cjlgb_design_oauth?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
     username: root
     password: root
+  data:
+    redis:
+      host: 10.252.37.200  
